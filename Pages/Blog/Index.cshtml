@@ -1,0 +1,64 @@
+@page
+@model razorweb.Pages_Blog.IndexModel
+
+@{
+    ViewData["Title"] = "bài viết";
+    int i=0;
+}
+
+<h1>Các bài viết</h1>
+
+<form method="GET" asp-page="./Index">
+    <label>Tìm Kiếm</label>
+    <input name="SearchString" value="">
+    <button type="submit">Tìm</button>
+</form>
+<p>
+    <a asp-page="Create" class="btn btn-primary">Tạo bài viết mới</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Acticle[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Acticle[0].PublishDate)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Acticle) {
+        <tr>
+            <td>@(++i)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublishDate)
+            </td>
+            
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Sửa</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Xem</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Xóa</a>
+            </td>
+        </tr>
+}
+    </tbody>
+    
+</table>
+@{
+    var pagingmodel = new NTK.Helpers.PagingModel()
+    {
+        currentpage = Model.currentPage,
+        countpage = Model.countPage,
+        generateUrl = (int? a) =>@Url.Page("/Blog/Index",new{p=a})
+    };
+}
+    <partial name="_PagingXTL" model=@pagingmodel></partial>
+

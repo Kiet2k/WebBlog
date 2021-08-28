@@ -1,0 +1,44 @@
+@page
+@model razorweb.Pages_Blog.CreateModel
+
+@{
+    ViewData["Title"] = "Tạo Bài Viết";
+}
+
+<h1>Tạo Bài Viết Mới</h1>
+
+<h4>Acticle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Acticle.Title" class="control-label"></label>
+                <input asp-for="Acticle.Title" class="form-control" />
+                <span asp-validation-for="Acticle.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Acticle.PublishDate" class="control-label"></label>
+                <input asp-for="Acticle.PublishDate" class="form-control" />
+                <span asp-validation-for="Acticle.PublishDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Acticle.Content" class="control-label"></label>
+                <textarea asp-for="Acticle.Content" class="form-control"></textarea>
+                <span asp-validation-for="Acticle.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Tạo Mới" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Danh Sách Bài Viết</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

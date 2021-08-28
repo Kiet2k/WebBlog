@@ -1,0 +1,45 @@
+@page "/sua-bai-viet/{id:int}"
+@model razorweb.Pages_Blog.EditModel
+
+@{
+    ViewData["Title"] = "Chỉnh Sửa";
+}
+
+<h1>Chỉnh Sửa</h1>
+
+<h4>Bài viết</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Acticle.ID" />
+            <div class="form-group">
+                <label asp-for="Acticle.Title" class="control-label"></label>
+                <input asp-for="Acticle.Title" class="form-control" />
+                <span asp-validation-for="Acticle.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Acticle.PublishDate" class="control-label"></label>
+                <input asp-for="Acticle.PublishDate" class="form-control" />
+                <span asp-validation-for="Acticle.PublishDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Acticle.Content" class="control-label"></label>
+                <textarea asp-for="Acticle.Content" class="form-control" ></textarea>
+                <span asp-validation-for="Acticle.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
